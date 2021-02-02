@@ -1,0 +1,61 @@
+from __future__ import print_function
+import logging
+import threading
+
+import grpc
+
+from tree import Tree
+import rpc_package.tree_pb2 as server
+from rpc_package.tree_pb2 import *
+from rpc_package.tree_pb2_grpc import TreeServiceStub
+
+CHANNEL = "localhost:50000"
+
+# This is the tree client object !!!!!!!
+class treeClient():
+
+    def __init__(self, name, channel):
+        self._name = name
+        self._channel = channel = grpc.insecure_channel(channel)
+        self._stub = TreeServiceStub(channel)
+        self._tree = Tree(0.4)
+        threading.Thread(target=self.__listening_for_requests, daemon=True).start()
+
+    def __listening_for_requests(self):
+        for reply in self._stub.Stream(server.Empty()):
+            print(reply.message)
+            print("Recieved request from server! target client: "+reply.client)
+            if self._name == reply.client:
+                print("Processing...")
+                self._tree.insert(self._tree._root,reply.trx)
+            else:
+                print("Ignored.")
+    
+    def send_request(self, trx):
+        if trx:
+            request = rootAddRequest(client=self._name,trx=trx,message="This is "+self._name+" requesting adding trx to server.")
+            reply = self._stub.add_note_root(request)
+            print(reply.message)
+
+            if reply.message == "Append to root.":
+                self._tree.insert(self._tree._root,reply.trx)
+
+
+
+
+
+def run():
+    # Tree service client is here !!!!!!
+    channel = CHANNEL
+    client_name = str(input("Please type your client name here: "))
+    c = treeClient(client_name, channel)
+    while True:
+        client_input = str(input("The transaction you wanna add here (e.g. 'ABCD'): "))
+        c.send_request(client_input)
+
+            
+    
+
+if __name__ == "__main__":
+    logging.basicConfig()
+    run()
