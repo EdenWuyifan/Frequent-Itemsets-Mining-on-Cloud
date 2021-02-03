@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\ntree.proto\x12\x0brpc_package\"\x07\n\x05\x45mpty\"\x1f\n\rinsertRequest\x12\x0e\n\x06\x63lient\x18\x01 \x01(\t\">\n\x0binsertReply\x12\x0e\n\x06status\x18\x01 \x01(\x08\x12\x0e\n\x06minsup\x18\x02 \x01(\x02\x12\x0f\n\x07message\x18\x03 \x01(\t\">\n\x0erootAddRequest\x12\x0e\n\x06\x63lient\x18\x01 \x01(\t\x12\x0b\n\x03trx\x18\x02 \x01(\t\x12\x0f\n\x07message\x18\x03 \x01(\t\"L\n\x0crootAddReply\x12\x0e\n\x06status\x18\x01 \x01(\x08\x12\x0e\n\x06\x63lient\x18\x02 \x01(\t\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\x0b\n\x03trx\x18\x04 \x01(\t\"=\n\rstreamRequest\x12\x0e\n\x06\x63lient\x18\x01 \x01(\t\x12\x0b\n\x03trx\x18\x02 \x01(\t\x12\x0f\n\x07message\x18\x03 \x01(\t2\x96\x01\n\x0bTreeService\x12I\n\radd_note_root\x12\x1b.rpc_package.rootAddRequest\x1a\x19.rpc_package.rootAddReply\"\x00\x12<\n\x06Stream\x12\x12.rpc_package.Empty\x1a\x1a.rpc_package.streamRequest\"\x00\x30\x01\x62\x06proto3'
+  serialized_pb=b'\n\ntree.proto\x12\x0brpc_package\"\x07\n\x05\x45mpty\"\x1f\n\rinsertRequest\x12\x0e\n\x06\x63lient\x18\x01 \x01(\t\">\n\x0binsertReply\x12\x0e\n\x06status\x18\x01 \x01(\x08\x12\x0e\n\x06minsup\x18\x02 \x01(\x02\x12\x0f\n\x07message\x18\x03 \x01(\t\">\n\x0erootAddRequest\x12\x0e\n\x06\x63lient\x18\x01 \x01(\t\x12\x0b\n\x03trx\x18\x02 \x01(\t\x12\x0f\n\x07message\x18\x03 \x01(\t\"\xa4\x01\n\x0crootAddReply\x12\x0e\n\x06status\x18\x01 \x01(\x08\x12\x0e\n\x06\x63lient\x18\x02 \x01(\t\x12\x37\n\x07message\x18\x03 \x03(\x0b\x32&.rpc_package.rootAddReply.MessageEntry\x12\x0b\n\x03trx\x18\x04 \x01(\t\x1a.\n\x0cMessageEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"=\n\rstreamRequest\x12\x0e\n\x06\x63lient\x18\x01 \x01(\t\x12\x0b\n\x03trx\x18\x02 \x01(\t\x12\x0f\n\x07message\x18\x03 \x01(\t2\x96\x01\n\x0bTreeService\x12I\n\radd_note_root\x12\x1b.rpc_package.rootAddRequest\x1a\x19.rpc_package.rootAddReply\"\x00\x12<\n\x06Stream\x12\x12.rpc_package.Empty\x1a\x1a.rpc_package.streamRequest\"\x00\x30\x01\x62\x06proto3'
 )
 
 
@@ -174,6 +174,44 @@ _ROOTADDREQUEST = _descriptor.Descriptor(
 )
 
 
+_ROOTADDREPLY_MESSAGEENTRY = _descriptor.Descriptor(
+  name='MessageEntry',
+  full_name='rpc_package.rootAddReply.MessageEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='rpc_package.rootAddReply.MessageEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='rpc_package.rootAddReply.MessageEntry.value', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=b'8\001',
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=316,
+  serialized_end=362,
+)
+
 _ROOTADDREPLY = _descriptor.Descriptor(
   name='rootAddReply',
   full_name='rpc_package.rootAddReply',
@@ -198,8 +236,8 @@ _ROOTADDREPLY = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='message', full_name='rpc_package.rootAddReply.message', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -213,7 +251,7 @@ _ROOTADDREPLY = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[],
+  nested_types=[_ROOTADDREPLY_MESSAGEENTRY, ],
   enum_types=[
   ],
   serialized_options=None,
@@ -222,8 +260,8 @@ _ROOTADDREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=197,
-  serialized_end=273,
+  serialized_start=198,
+  serialized_end=362,
 )
 
 
@@ -268,10 +306,12 @@ _STREAMREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=275,
-  serialized_end=336,
+  serialized_start=364,
+  serialized_end=425,
 )
 
+_ROOTADDREPLY_MESSAGEENTRY.containing_type = _ROOTADDREPLY
+_ROOTADDREPLY.fields_by_name['message'].message_type = _ROOTADDREPLY_MESSAGEENTRY
 DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 DESCRIPTOR.message_types_by_name['insertRequest'] = _INSERTREQUEST
 DESCRIPTOR.message_types_by_name['insertReply'] = _INSERTREPLY
@@ -309,11 +349,19 @@ rootAddRequest = _reflection.GeneratedProtocolMessageType('rootAddRequest', (_me
 _sym_db.RegisterMessage(rootAddRequest)
 
 rootAddReply = _reflection.GeneratedProtocolMessageType('rootAddReply', (_message.Message,), {
+
+  'MessageEntry' : _reflection.GeneratedProtocolMessageType('MessageEntry', (_message.Message,), {
+    'DESCRIPTOR' : _ROOTADDREPLY_MESSAGEENTRY,
+    '__module__' : 'tree_pb2'
+    # @@protoc_insertion_point(class_scope:rpc_package.rootAddReply.MessageEntry)
+    })
+  ,
   'DESCRIPTOR' : _ROOTADDREPLY,
   '__module__' : 'tree_pb2'
   # @@protoc_insertion_point(class_scope:rpc_package.rootAddReply)
   })
 _sym_db.RegisterMessage(rootAddReply)
+_sym_db.RegisterMessage(rootAddReply.MessageEntry)
 
 streamRequest = _reflection.GeneratedProtocolMessageType('streamRequest', (_message.Message,), {
   'DESCRIPTOR' : _STREAMREQUEST,
@@ -323,6 +371,7 @@ streamRequest = _reflection.GeneratedProtocolMessageType('streamRequest', (_mess
 _sym_db.RegisterMessage(streamRequest)
 
 
+_ROOTADDREPLY_MESSAGEENTRY._options = None
 
 _TREESERVICE = _descriptor.ServiceDescriptor(
   name='TreeService',
@@ -331,8 +380,8 @@ _TREESERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=339,
-  serialized_end=489,
+  serialized_start=428,
+  serialized_end=578,
   methods=[
   _descriptor.MethodDescriptor(
     name='add_note_root',

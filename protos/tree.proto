@@ -30,7 +30,7 @@ message rootAddRequest {
 message rootAddReply {
     bool status = 1;
     string client = 2;
-    string message = 3;
+    map<string, string> message = 3;
     string trx = 4;
 }
 

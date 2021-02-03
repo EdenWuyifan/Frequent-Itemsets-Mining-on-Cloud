@@ -137,22 +137,21 @@ class Tree(TreeServiceServicer):
 
     def add_note_root(self, request, context):
         trx = request.trx
+        ret_msg = {}
         for i in range(len(trx)):
             if trx[i] not in self._root._children.keys():
                 newNode = self._addNode(self._root, trx[i])
                 newNode._subtree_loc = request.client
-                self.insertAndRecord(self._root._children[trx[i]], trx[i+1:])
+                # Add only one single note to root
                 print("Appended. Size: " + str(self._size))
-                return rootAddReply(status=True,
-                                    client=request.client,message="Append to root.",trx=trx)
+                ret_msg[trx[i:]] = "Append " + trx[i] + " to root\n"
             else:
                 for node in self.nodes():
                     if node._key == trx[i]:
                         self._history.append(streamRequest(client=node._subtree_loc,trx=trx,message="boardcasting for client: "+node._subtree_loc))
-                        return rootAddReply(status=True,
-                                            client=request.client,message="Reroute to client: "+node._subtree_loc,trx="")
-                return rootAddReply(status=False,
-                                    client=request.client, message="Something's wrong here...",trx="")
+                        ret_msg[trx[i:]] =  "Reroute to client: " + node._subtree_loc +"\n"
+        return rootAddReply(status=True,
+                            client=request.client, message=ret_msg,trx="")
 
     # Keep sending messages for new insert requests
     def Stream(self, request, context):
@@ -162,13 +161,6 @@ class Tree(TreeServiceServicer):
                     boardcast = self._history[lastindex]
                     lastindex += 1
                     yield boardcast
-    
-    def Insert(self, request, context):
-        #trx = request.trx
-        return insertReply(status=True,
-                           minsup=self.minsup,
-                           message='Insert request recieved, %s!' % request.client)
-
 
 
 def serve():

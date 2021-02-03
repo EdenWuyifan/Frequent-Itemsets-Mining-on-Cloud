@@ -35,10 +35,14 @@ class treeClient():
         if trx:
             request = rootAddRequest(client=self._name,trx=trx,message="This is "+self._name+" requesting adding trx to server.")
             reply = self._stub.add_note_root(request)
-            print(reply.message)
 
-            if reply.message == "Append to root.":
-                self._tree.insert(self._tree._root,reply.trx)
+            for trx, msg in reply.message.items():
+                if msg[:6] == "Append":
+                    self._tree.insert(self._tree._root,trx)
+                    print("Add {}, current size {}".format(trx, self._tree._size))
+                else:
+                    print("Reroute to client {}".format(msg[19:]))
+
 
 
 
