@@ -28,6 +28,7 @@ class treeClient():
             if self._name == reply.client:
                 print("Processing...")
                 self._tree.insert(self._tree._root,reply.trx)
+                print(self._tree)
             else:
                 print("Ignored.")
     
@@ -39,8 +40,10 @@ class treeClient():
             for trx, msg in reply.message.items():
                 if msg[:6] == "Append":
                     self._tree.insert(self._tree._root,trx)
+                    print(self._tree)
                     print("Add {}, current size {}".format(trx, self._tree._size))
                 else:
+                    print(self._tree)
                     print("Reroute to client {}".format(msg[19:]))
 
 
