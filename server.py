@@ -132,12 +132,14 @@ class Tree(TreeServiceServicer):
     # ----------------------------------------------------------------------- #
     # new implementation's here!!!
     # the server tree only support some of the functions and only have one level
+    ###TODO: hash map (item/itemset -> node)
 
     
 
     def add_note_root(self, request, context):
         trx = request.trx
         ret_msg = {}
+        # debug
         for i in range(len(trx)):
             if trx[i] not in self._root._children.keys():
                 newNode = self._addNode(self._root, trx[i])
