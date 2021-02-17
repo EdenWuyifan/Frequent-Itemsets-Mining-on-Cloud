@@ -85,9 +85,12 @@ class Tree():
             node._item_table[item] = node._item_table.get(item, 0) + count
         for item in comb:
             # item just became frequent
-            if node._item_table[item] >= self.minsup and (node._key + "," + item) not in node._children:
+            prefix = ""
+            if node._key:
+                prefix = node._key + ","
+            if node._item_table[item] >= self.minsup and (prefix + item) not in node._children:
                 # add node
-                newNode = self._addNode(node, node._key + "," + item, node._item_table[item])
+                newNode = self._addNode(node, prefix + item, node._item_table[item])
                 # transfer patterns to newNode
                 for key in list(node._comb_table.keys()):
                     ptn = key.split(",")
@@ -108,8 +111,11 @@ class Tree():
             return
         self._recordInfo(node, comb)
         for i in range(len(comb)):
-            if node._key + "," + comb[i] in node._children.keys():
-                self.insertAndRecord(node._children[node._key + "," + comb[i]], comb[i+1:])
+            prefix = ""
+            if node._key:
+                prefix = node._key + ","
+            if prefix + comb[i] in node._children.keys():
+                self.insertAndRecord(node._children[prefix + comb[i]], comb[i+1:])
 
     def insert(self, node, trx):
         for i in range(len(trx)):

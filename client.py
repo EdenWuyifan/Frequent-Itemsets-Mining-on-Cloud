@@ -29,25 +29,27 @@ class treeClient():
                 print("Processing...")
                 # check if should add new item node
                 if reply.addNewItem:
-                    newNode = self._addNode(None, reply.trx[0])
-                self._tree.insertAndRecord(self._tree._root,reply.trx)
-                print(self._tree)
+                    # client tree has a dummy root
+                    newNode = self._tree._addNode(self._tree._root, reply.trx[0])
+                # directly insert from the item node
+                self._tree.insertAndRecord(self._tree._root._children[reply.trx[0]],reply.trx[1:])
             else:
                 print("Ignored.")
+            print(f"Tree at client {self._name}: ", self._tree)
 
     def send_request(self, trx):
         if trx:
             request = rootAddRequest(client=self._name,trx=trx,message="This is "+self._name+" requesting adding trx to server.")
             reply = self._stub.add_note_root(request)
 
-            for trx, msg in reply.message.items():
-                if msg[:6] == "Append":
-                    self._tree.insert(self._tree._root,trx)
-                    print(self._tree)
-                    print("Add {}, current size {}".format(trx, self._tree._size))
-                else:
-                    print(self._tree)
-                    print("Reroute to client {}".format(msg[19:]))
+            # for trx, msg in reply.message.items():
+            #     if msg[:6] == "Append":
+            #         self._tree.insert(self._tree._root,trx)
+            #         print(self._tree)
+            #         print("Add {}, current size {}".format(trx, self._tree._size))
+            #     else:
+            #         print(self._tree)
+            #         print("Reroute to client {}".format(msg[19:]))
 
 
 

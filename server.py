@@ -6,6 +6,8 @@ import time
 from rpc_package.tree_pb2_grpc import add_TreeServiceServicer_to_server, TreeServiceServicer
 from rpc_package.tree_pb2 import *
 
+# Root node at the server
+# Stores an item-client mapping
 class TreeNode():
     def __init__(self, key = None, parent = None, count = 0):
         self._key = key
@@ -95,9 +97,12 @@ class Tree(TreeServiceServicer):
             node._item_table[item] = node._item_table.get(item, 0) + count
         for item in comb:
             # item just became frequent
-            if node._item_table[item] >= self.minsup and (node._key + "," + item) not in node._children:
+            prefix = ""
+            if node._key:
+                prefix = node._key + ","
+            if node._item_table[item] >= self.minsup and (prefix + item) not in node._children:
                 # add node
-                newNode = self._addNode(node, node._key + "," + item, node._item_table[item])
+                newNode = self._addNode(node, prefix + item, node._item_table[item])
                 # transfer patterns to newNode
                 for key in list(node._comb_table.keys()):
                     ptn = key.split(",")
@@ -118,8 +123,11 @@ class Tree(TreeServiceServicer):
             return
         self._recordInfo(node, comb)
         for i in range(len(comb)):
-            if node._key + "," + comb[i] in node._children.keys():
-                self.insertAndRecord(node._children[node._key + "," + comb[i]], comb[i+1:])
+            prefix = ""
+            if node._key:
+                prefix = node._key + ","
+            if prefix + comb[i] in node._children.keys():
+                self.insertAndRecord(node._children[prefix + comb[i]], comb[i+1:])
 
     def insert(self, node, trx):
         for i in range(len(trx)):
@@ -128,22 +136,23 @@ class Tree(TreeServiceServicer):
             self.insertAndRecord(node._children[trx[i]], trx[i+1:])
 
     # ----------------------------------------------------------------------- #
-    # ----------------------------------------------------------------------- #
-    # ----------------------------------------------------------------------- #
-    # new implementation's here!!!
-    # the server tree only support some of the functions and only have one level
+    # rerouter at the server
+    # feeds trxs to the mapped clients
     def add_note_root(self, request, context):
         trx = request.trx
         client = request.client
         ret_msg = {}
-        # debug
+        # server root acts as the root of a centralized tree
+        # it iterates through the trx to feed the segments to the clients
         for i in range(len(trx)):
             # if the item is new and not mapped to a client
             if not self._root.lookup(trx[i]):
+                print("New item: create mapping")
                 self._root.addMapping(trx[i], client)
                 # Add only one single note to root
-                print("Appended. Size: " + str(self._size))
-                self._history.append(streamRequest(client=subtree_loc,trx=trx[i:],message="boardcasting for client: "+subtree_loc, addNewItem=True))
+                # server tree size always 0
+                # print("Appended. Size: " + str(self._size))
+                self._history.append(streamRequest(client=client,trx=trx[i:],message="boardcasting for client: "+client, addNewItem=True))
                 ret_msg[trx[i:]] = "Append " + trx[i:] + " to root\n"
             # if the item is already mapped to a client
             else:

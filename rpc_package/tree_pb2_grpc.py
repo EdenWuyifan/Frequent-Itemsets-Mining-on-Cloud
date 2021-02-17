@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import tree_pb2 as tree__pb2
+from . import tree_pb2 as tree__pb2
 
 
 class TreeServiceStub(object):
