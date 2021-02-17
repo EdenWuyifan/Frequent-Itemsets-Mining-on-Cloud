@@ -1,5 +1,5 @@
 # Frequent-Itemsets-Mining-on-Cloud
-This is the capstone project I did with Jenny Zhu! 
+This is the capstone project I did with Jenny Zhu!
 
 ---
 
@@ -11,3 +11,7 @@ This is the capstone project I did with Jenny Zhu!
 * You can open parallel client.py for testing its durability.
 
 ###### Eden Wu
+
+###### Jenny Zhu
+generate grpc code:
+$ python -m grpc_tools.protoc -I./protos --python_out=./rpc_package --grpc_python_out=./rpc_package ./protos/tree.proto

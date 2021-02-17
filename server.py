@@ -15,11 +15,13 @@ class TreeNode():
         self._comb_table = {}
         self._item_table = {}
 
-        #add a subtree location
-        self._subtree_loc = ""
+    def addMapping(self, item, client_name):
+        self._children[item] = client_name
 
-    def addChild(self, node):
-        self._children[node._key] = node
+    def lookup(self, item):
+        if item in self._children:
+            return self._children[item]
+        return ""
 
 
 class Tree(TreeServiceServicer):
@@ -125,35 +127,31 @@ class Tree(TreeServiceServicer):
                 newNode = self._addNode(node, trx[i])
             self.insertAndRecord(node._children[trx[i]], trx[i+1:])
 
-
-
     # ----------------------------------------------------------------------- #
     # ----------------------------------------------------------------------- #
     # ----------------------------------------------------------------------- #
     # new implementation's here!!!
     # the server tree only support some of the functions and only have one level
-    ###TODO: hash map (item/itemset -> node)
-
-    
-
     def add_note_root(self, request, context):
         trx = request.trx
+        client = request.client
         ret_msg = {}
         # debug
         for i in range(len(trx)):
-            if trx[i] not in self._root._children.keys():
-                newNode = self._addNode(self._root, trx[i])
-                newNode._subtree_loc = request.client
+            # if the item is new and not mapped to a client
+            if not self._root.lookup(trx[i]):
+                self._root.addMapping(trx[i], client)
                 # Add only one single note to root
                 print("Appended. Size: " + str(self._size))
-                ret_msg[trx[i:]] = "Append " + trx[i] + " to root\n"
+                self._history.append(streamRequest(client=subtree_loc,trx=trx[i:],message="boardcasting for client: "+subtree_loc, addNewItem=True))
+                ret_msg[trx[i:]] = "Append " + trx[i:] + " to root\n"
+            # if the item is already mapped to a client
             else:
-                for node in self.nodes():
-                    if node._key == trx[i]:
-                        self._history.append(streamRequest(client=node._subtree_loc,trx=trx,message="boardcasting for client: "+node._subtree_loc))
-                        ret_msg[trx[i:]] =  "Reroute to client: " + node._subtree_loc +"\n"
+                subtree_loc = self._root.lookup(trx[i])
+                self._history.append(streamRequest(client=subtree_loc,trx=trx[i:],message="boardcasting for client: "+subtree_loc, addNewItem=False))
+                ret_msg[trx[i:]] =  "Reroute to client: " + subtree_loc +"\n"
         return rootAddReply(status=True,
-                            client=request.client, message=ret_msg,trx="")
+                            client=client, message=ret_msg, trx="")
 
     # Keep sending messages for new insert requests
     def Stream(self, request, context):
@@ -184,4 +182,3 @@ def serve():
 if __name__ == "__main__":
     logging.basicConfig()
     serve()
-

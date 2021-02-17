@@ -38,4 +38,5 @@ message streamRequest {
     string client = 1;
     string trx = 2;
     string message = 3;
+    bool addNewItem = 4;
 }

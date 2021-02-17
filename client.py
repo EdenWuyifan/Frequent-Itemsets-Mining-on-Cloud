@@ -27,11 +27,14 @@ class treeClient():
             print("Recieved request from server! target client: "+reply.client)
             if self._name == reply.client:
                 print("Processing...")
-                self._tree.insert(self._tree._root,reply.trx)
+                # check if should add new item node
+                if reply.addNewItem:
+                    newNode = self._addNode(None, reply.trx[0])
+                self._tree.insertAndRecord(self._tree._root,reply.trx)
                 print(self._tree)
             else:
                 print("Ignored.")
-    
+
     def send_request(self, trx):
         if trx:
             request = rootAddRequest(client=self._name,trx=trx,message="This is "+self._name+" requesting adding trx to server.")
@@ -48,9 +51,6 @@ class treeClient():
 
 
 
-
-
-
 def run():
     # Tree service client is here !!!!!!
     channel = CHANNEL
@@ -60,8 +60,8 @@ def run():
         client_input = str(input("The transaction you wanna add here (e.g. 'ABCD'): "))
         c.send_request(client_input)
 
-            
-    
+
+
 
 if __name__ == "__main__":
     logging.basicConfig()
