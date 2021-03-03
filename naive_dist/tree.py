@@ -10,9 +10,18 @@ class TreeNode():
         self._children = {}
         self._comb_table = {}
         self._item_table = {}
+        self._map = {}
 
     def addChild(self, node):
         self._children[node._key] = node
+
+    def addMapping(self, item, client_name):
+        self._map[item] = client_name
+
+    def lookup(self, item):
+        if item in self._map:
+            return self._map[item]
+        return ""
 
 
 class Tree():

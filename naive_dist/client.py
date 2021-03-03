@@ -1,6 +1,7 @@
 from __future__ import print_function
 import logging
 import threading
+import sys
 
 import grpc
 
@@ -53,10 +54,10 @@ class treeClient():
 
 
 
-def run():
+def run(client_name):
     # Tree service client is here !!!!!!
     channel = CHANNEL
-    client_name = str(input("Please type your client name here: "))
+    # client_name = str(input("Please type your client name here: "))
     c = treeClient(client_name, channel)
     while True:
         client_input = str(input("The transaction you wanna add here (e.g. 'ABCD'): "))
@@ -66,5 +67,9 @@ def run():
 
 
 if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Missing client name!")
+        sys.exit()
+
     logging.basicConfig()
-    run()
+    run(sys.argv[1])

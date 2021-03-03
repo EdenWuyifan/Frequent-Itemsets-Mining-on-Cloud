@@ -12,6 +12,10 @@ This is the capstone project I did with Jenny Zhu!
 
 ###### Eden Wu
 
-###### Jenny Zhu
-generate grpc code:
+### Jenny Zhu
+##### generate grpc code:
 $ python -m grpc_tools.protoc -I./protos --python_out=./rpc_package --grpc_python_out=./rpc_package ./protos/tree.proto
+
+---
+### naive distribution
+Map new items to the client which introduced them.
