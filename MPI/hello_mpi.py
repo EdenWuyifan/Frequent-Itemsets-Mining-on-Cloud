@@ -37,7 +37,9 @@ def main():
             #input
             trx = input("Input transaction: ")
             trx = trx.split(",")
-            me.send(me.hash(trx[0]),trx)
+            me.send(trx)
+        else:
+            me.listening()
 
 
 if __name__=="__main__":
