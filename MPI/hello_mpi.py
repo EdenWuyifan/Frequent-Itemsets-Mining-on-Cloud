@@ -1,7 +1,7 @@
 from mpi4py import MPI
 import numpy as np
 
-from utils import worker
+from utils import worker, scanDB, calc_minsup 
 
 '''
 #-----------------------SEND-------------------------
@@ -29,18 +29,21 @@ print("process {} receive data {}...".format(rank, data))
 
 def main():
     # create new worker upon init
-    me = worker()
+    db = scanDB("retail.txt", " ")
+    minsup = calc_minsup(40, db)
+    me = worker(minsup)
 
+    print(len(db))
     # spanning
-    while True: 
+    for trx in db:
         if me._rank == 0:
             #input
-            trx = input("Input transaction: ")
-            trx = trx.split(",")
             me.send(trx)
         else:
             me.listening()
 
+    print("NO.",me._rank,"Size:",me._tree.size())
+    print(me._tree)
 
 if __name__=="__main__":
     main()
