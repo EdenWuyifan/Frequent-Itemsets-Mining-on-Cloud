@@ -120,8 +120,8 @@ class Tree():
                 self.insertAndRecord(node._children[prefix + comb[i]], comb[i+1:])
 
     def insert(self, node, trx):
-        for i in range(len(trx)):
-            if trx[i] not in node._children.keys():
-                newNode = self._addNode(node, trx[i])
-            self.insertAndRecord(node._children[trx[i]], trx[i+1:])
-        print("Current size:",self._size)
+        #for i in range(len(trx)):
+        if trx[0] not in node._children.keys():
+            newNode = self._addNode(node, trx[0])
+        self.insertAndRecord(node._children[trx[0]], trx[1:])
+        #print("Current size:",self._size)

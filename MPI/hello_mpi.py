@@ -30,7 +30,7 @@ print("process {} receive data {}...".format(rank, data))
 def main():
     # create new worker upon init
     db = scanDB("retail.txt", " ")
-    minsup = calc_minsup(40, db)
+    minsup = calc_minsup(20, db)
     me = worker(minsup)
 
     print(len(db))
