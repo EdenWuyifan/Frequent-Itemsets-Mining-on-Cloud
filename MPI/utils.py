@@ -39,9 +39,9 @@ class worker():
         return hashing(item)
 
     def insert(self, trx):
-        if trx[0] not in self._tree._root._children:
-            newNode = self._tree._addNode(self._tree._root, trx[0])
-        self._tree.insertAndRecord(self._tree._root._children[trx[0]],trx[1:])
+        #if trx[0] not in self._tree._root._children:
+        #    newNode = self._tree._addNode(self._tree._root, trx[0])
+        self._tree.insert(self._tree._root,trx)
         #print("Worker NO.%d inserted. Current size: %d" % (self._rank, self._tree.size()))
     
     def send(self, trx):
@@ -49,11 +49,11 @@ class worker():
         # Buggy
         for i in range(len(trx)):
             curr_hash = self.hash(trx[i])
-            if curr_hash == self._rank:
-                self.insert(trx[i:])
+            #if curr_hash == self._rank:
+                #self.insert(trx[i:])
                 #print("Append locally.")
-            else:
-                self._comm.send(trx[i:], dest=curr_hash, tag=11)
+            #else:
+            self._comm.send(trx[i:], dest=curr_hash, tag=11)
                 #print("reroute to dest %d." % curr_hash)
         
         
