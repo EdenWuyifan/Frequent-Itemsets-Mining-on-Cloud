@@ -54,7 +54,7 @@ class worker():
                 #print("Append locally.")
             else:
                 self._comm.send(trx[i:], dest=curr_hash, tag=11)
-                #print("reroute to dest %d." % curr_hash)
+                #print("reroute to dest %d." % curr_hash)z
         
         
     
