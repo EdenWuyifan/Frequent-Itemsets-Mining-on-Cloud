@@ -24,6 +24,8 @@ def main():
         if me._rank == 0:
             #input
             me.send(trx)
+            me.bcast_finish()
+            
         else:
             me.listening()
 

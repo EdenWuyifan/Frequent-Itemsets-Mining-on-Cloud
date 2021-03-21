@@ -56,10 +56,16 @@ class worker():
             self._comm.send(trx[i:], dest=curr_hash, tag=11)
                 #print("reroute to dest %d." % curr_hash)
 
+    def bcast_finish(self):
+        for i in range(1,NUM_WORKER+1):
+            self._comm.send([], dest=i, tag=11)
 
 
     # this function keep on spanning
     def listening(self):
         # we recv from rank 0
-        trx = self._comm.recv(source=0, tag=11)
-        self.insert(trx)
+        while True:
+            trx = self._comm.recv(source=0, tag=11)
+            if trx == []:
+                break
+            self.insert(trx)
