@@ -75,7 +75,6 @@ class worker():
 
     def send(self, trx):
         
-        print("S...")
         for i in range(len(trx)):
             #If trx[i] already being routed
             try:
@@ -87,16 +86,16 @@ class worker():
 
                 #Send Size Requests to workers
                 for j in range(len(hashs)):
-                    self._comm.isend(self._rank, dest=hashs[j], tag=1)
-                
+                    self._comm.send(self._rank, dest=hashs[j], tag=1)
+
                 #Receive sizes from targeted workers
                 hash_choice = 0
-                min_size = self._comm.irecv(source=hashs[0], tag=1).wait()
-                size = self._comm.irecv(source=hashs[1], tag=1).wait()
+                min_size = int(self._comm.recv(source=hashs[0], tag=1))
+                size = int(self._comm.recv(source=hashs[1], tag=1))
                 if size < min_size:
                     hash_choice = 1
                     min_size = size
-                size = self._comm.irecv(source=hashs[2], tag=1).wait()
+                size = int(self._comm.recv(source=hashs[2], tag=1))
                 if size < min_size:
                     hash_choice = 2
                     min_size = size
@@ -105,12 +104,12 @@ class worker():
                 self._rt[trx[i]] = hash_choice
             
             #Send to the worker with least load
-            self._comm.isend(trx[i:], dest=hashs[hash_choice], tag=0)
+            self._comm.send(trx[i:], dest=hashs[hash_choice], tag=0)
             #print("reroute to dest %d." % curr_hash)
 
     def bcast_finish(self):
         for i in range(1,NUM_WORKER+1):
-            self._comm.isend([], dest=i, tag=0)
+            self._comm.send([], dest=i, tag=0)
     
     
      ### ----------------workers------------------- ###
@@ -121,20 +120,16 @@ class worker():
     # this function keep on spanning
     def listening(self):
         # we recv from rank 0
-        while True:     
-            #Receive Size Request from worker 0
-            req = self._comm.irecv(source=MPI_ANY_SOURCE, tag=1)
-            req = req.wait()
-            print("req received.")
-            if req:
-                self._comm.isend(self._tree._size, dest=req, tag=1)
-                
-                
-            #Receive trx from worker 0
-            trx = self._comm.irecv(source=0, tag=0)
-            trx = trx.wait()
-
-            print("trx received.")
+        while True:
+            trx = self._comm.recv(source=0, tag=0)
+            
             if trx == []:
                 break
             self.insert(trx)
+            
+            
+            
+            #Receive Size Request from worker 0
+            req = self._comm.recv(source=MPI_ANY_SOURCE, tag=1)
+            if req:
+                self._comm.send(self._tree._size, dest=req, tag=1)
