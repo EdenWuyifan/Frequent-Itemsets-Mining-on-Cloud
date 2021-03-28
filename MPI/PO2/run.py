@@ -13,13 +13,13 @@ args = parser.parse_args()
 def main():
     # create new worker upon init
     if args.database == "retail":
-        db = scanDB("databases/retail.txt", " ")
+        db = scanDB("../databases/retail.txt", " ")
     elif args.database == "kosarak":
-        db = scanDB("databases/kosarak.dat", " ")
+        db = scanDB("../databases/kosarak.dat", " ")
     elif args.database == "chainstore":
-        db = scanDB("databases/chainstoreFIM.txt", " ")
+        db = scanDB("../databases/chainstoreFIM.txt", " ")
     elif args.database == "susy":
-        db = scanDB("databases/SUSY.txt", " ")
+        db = scanDB("../databases/SUSY.txt", " ")
 
     minsup = calc_minsup(int(args.minsup), db)
     
