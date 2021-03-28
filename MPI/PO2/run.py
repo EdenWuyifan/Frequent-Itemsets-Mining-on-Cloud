@@ -22,18 +22,19 @@ def main():
         db = scanDB("databases/SUSY.txt", " ")
 
     minsup = calc_minsup(int(args.minsup), db)
+    
     me = worker(minsup)
-
     #print(len(db))
-    # spanning
-    for trx in db:
-        if me._rank == 0:
-            #input
+    
+    if me._rank == 0:
+        
+        #input
+        for trx in db:
             me.send(trx)
-            me.bcast_finish()
+        me.bcast_finish()
             
-        else:
-            me.listening()
+    else:
+        me.listening()
 
     print("NO.",me._rank,"Table Size:",me._tree._table_size)
     #print("NO.",me._rank, "Tree Size:",len(tree_list))
