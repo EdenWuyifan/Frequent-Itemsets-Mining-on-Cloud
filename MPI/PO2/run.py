@@ -10,20 +10,45 @@ parser.add_argument('--minsup', '-m', help='min support percentage', required=Tr
 args = parser.parse_args()
 
 
-def main():
-    # create new worker upon init
-    if args.database == "retail":
-        db = scanDB("../databases/retail.txt", " ")
-    elif args.database == "kosarak":
-        db = scanDB("../databases/kosarak.dat", " ")
-    elif args.database == "chainstore":
-        db = scanDB("../databases/chainstoreFIM.txt", " ")
-    elif args.database == "susy":
-        db = scanDB("../databases/SUSY.txt", " ")
+if args.database == "retail":
+    db = scanDB("../databases/retail.txt", " ")
+elif args.database == "kosarak":
+    db = scanDB("../databases/kosarak.dat", " ")
+elif args.database == "chainstore":
+    db = scanDB("../databases/chainstoreFIM.txt", " ")
+elif args.database == "susy":
+    db = scanDB("../databases/SUSY.txt", " ")
+elif args.database == "record":
+    db = scanDB("../databases/RecordLink.txt", " ")
+elif args.database == "skin":
+    db = scanDB("../databases/Skin.txt", " ")
+elif args.database == "uscensus":
+    db = scanDB("../databases/USCensus.txt", " ")
+elif args.database == "online":
+    db = scanDB("databases/OnlineRetailZZ.txt", " ")
 
-    minsup = calc_minsup(int(args.minsup), db)
+minsup = calc_minsup(int(args.minsup), db)
+
+def main(me):
+    # create new worker upon init
+#    if args.database == "retail":
+#        db = scanDB("../databases/retail.txt", " ")
+#    elif args.database == "kosarak":
+#        db = scanDB("../databases/kosarak.dat", " ")
+#    elif args.database == "chainstore":
+#        db = scanDB("../databases/chainstoreFIM.txt", " ")
+#    elif args.database == "susy":
+#        db = scanDB("../databases/SUSY.txt", " ")
+#    elif args.database == "record":
+#        db = scanDB("../databases/RecordLink.txt", " ")
+#    elif args.database == "skin":
+#        db = scanDB("../databases/Skin.txt", " ")
+#    elif args.database == "uscensus":
+#        db = scanDB("../databases/USCensus.txt", " ")
+
+#    minsup = calc_minsup(int(args.minsup), db)
     
-    me = worker(minsup)
+    #me = worker(minsup)
     #print(len(db))
     
     if me._rank == 0:
@@ -37,9 +62,10 @@ def main():
         me.listening()
 
     #print("NO.",me._rank,"Table Size:",me._tree._table_size)
-    #print("NO.",me._rank, "Tree Size:",len(tree_list))
+    print("NO.",me._rank, "Tree Size:",me._tree.size())
     print(me._tree)
     #print("finished.")
 
 if __name__=="__main__":
-    main()
+    me = worker(minsup)
+    main(me)

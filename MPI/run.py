@@ -20,6 +20,14 @@ def main():
         db = scanDB("databases/chainstoreFIM.txt", " ")
     elif args.database == "susy":
         db = scanDB("databases/SUSY.txt", " ")
+    elif args.database == "record":
+        db = scanDB("databases/RecordLink.txt", " ")
+    elif args.database == "skin":
+        db = scanDB("databases/Skin.txt", " ")
+    elif args.database == "uscensus":
+        db = scanDB("databases/USCensus.txt", " ")
+    elif args.database == "online":
+        db = scanDB("databases/OnlineRetailZZ.txt", " ")
 
     minsup = calc_minsup(int(args.minsup), db)
     me = worker(minsup)
@@ -35,9 +43,9 @@ def main():
         else:
             me.listening()
 
-    print("NO.",me._rank,"Table Size:",me._tree._table_size)
+    #print("NO.",me._rank,"Table Size:",me._tree._table_size)
     #print("NO.",me._rank, "Tree Size:",len(tree_list))
-    #print(me._tree.size())
+    print(me._tree.size())
     #print("finished.")
 
 if __name__=="__main__":
