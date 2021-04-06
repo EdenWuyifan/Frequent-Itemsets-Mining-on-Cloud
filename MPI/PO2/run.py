@@ -2,7 +2,7 @@ from mpi4py import MPI
 import numpy as np
 import argparse
 
-from utils import worker, scanDB, calc_minsup 
+from utils import worker, scanDB, calc_minsup
 
 parser = argparse.ArgumentParser(description='argparse')
 parser.add_argument('--database', '-d', help='database name', required=True)
@@ -47,25 +47,32 @@ def main(me):
 #        db = scanDB("../databases/USCensus.txt", " ")
 
 #    minsup = calc_minsup(int(args.minsup), db)
-    
+
     #me = worker(minsup)
     #print(len(db))
-    
+
     if me._rank == 0:
-        
+
         #input
         for trx in db:
             me.send(trx)
         me.bcast_finish()
-            
+
     else:
         me.listening()
 
     #print("NO.",me._rank,"Table Size:",me._tree._table_size)
-    print("NO.",me._rank, "Tree Size:",me._tree.size())
-    print(me._tree)
+    if me._rank != 0:
+        print("NO.",me._rank, "Tree Size:",me._tree.size())
+        # print(me._rank)
+        return str(me._tree)
     #print("finished.")
 
 if __name__=="__main__":
     me = worker(minsup)
-    main(me)
+    tree = main(me)
+    # save tree nodes of each host in output.txt
+    if me._rank != 0:
+        with open("./output.txt", 'a') as f:
+            f.write("rank " + str(me._rank) + "\n")
+            f.write(str(tree) + "\n")

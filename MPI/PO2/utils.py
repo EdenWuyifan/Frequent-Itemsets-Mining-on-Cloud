@@ -39,9 +39,9 @@ class worker_0():
         self._comm = MPI.COMM_WORLD
         self._rank = self._comm.Get_rank()
         self._size = self._comm.Get_size()
-        
-        
-        
+
+
+
         print("NODE created. rank is: %d" % self._rank)
 
 
@@ -54,16 +54,16 @@ class worker():
         self._size = self._comm.Get_size()
         if self._rank != 0:
             #Tries for workers
-            self._tree = Tree(minsup) 
+            self._tree = Tree(minsup)
         else:
             #Routing Table for worker 0
             self._rt = {}
         print("NODE created. rank is: %d" % self._rank)
 
-        
+
      ### ----------------worker.0------------------ ###
-    
-    
+
+
     def hash(self, item, mode=None):
         if mode is None:
             #Need to be fixed here. Remove Duplicate?
@@ -74,7 +74,7 @@ class worker():
     def insert(self, trx):
         self._tree.insert(self._tree._root,trx)
 
-    def send(self, trx): 
+    def send(self, trx):
         for i in range(len(trx)):
             #If trx[i] already being routed
             try:
@@ -87,7 +87,7 @@ class worker():
                 #Send Size Requests to workers
                 for j in range(len(hashs)):
                     self._comm.send((j,), dest=hashs[j], tag=1)
-                
+
                 #Receive sizes from targeted workers
                 temp_recv = self._comm.recv(source=MPI.ANY_SOURCE, tag=1)
                 min_size = temp_recv[1]
@@ -97,7 +97,7 @@ class worker():
                     if temp_recv[1]<min_size:
                         min_size = temp_recv[1]
                         hash_choice = temp_recv[0]
-            
+
                 #Update routing table
                 self._rt[trx[i]] = hash_choice
                 #Send to the worker with least load
@@ -107,8 +107,8 @@ class worker():
     def bcast_finish(self):
         for i in range(1,NUM_WORKER+1):
             self._comm.send([], dest=i, tag=0)
-    
-    
+
+
      ### ----------------workers------------------- ###
     def insert(self, trx):
         self._tree.insert(self._tree._root,trx)
@@ -117,16 +117,16 @@ class worker():
     # this function keep on spanning
     def listening(self):
         # we recv from rank 0
-        while True:     
+        while True:
             #Receive Size Request from worker 0
             req = self._comm.recv(source=0, tag=MPI.ANY_TAG)
-            
+
             if type(req) == tuple:
                 #print("req received.")
                 self._comm.send((req[0],self._tree._table_size), dest=0, tag=1)
-                
+
             else:
-                #Receive trx from worker 0 
+                #Receive trx from worker 0
                 #print("trx received.")
                 if req == []:
                     break
