@@ -19,4 +19,4 @@ for i in range(len(keys)):
         for item in trees[key1]:
             if item in trees[key2]:
                 duplicates.append(item)
-        print(key1, key2, len(duplicates))
+        print(key1, key2, duplicates)

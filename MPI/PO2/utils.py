@@ -67,7 +67,7 @@ class worker():
     def hash(self, item, mode=None):
         if mode is None:
             #Need to be fixed here. Remove Duplicate?
-            return [hashing(item, 1),hashing(item, 2),hashing(item, 3)]
+            return [hashing(item, 0),hashing(item, 1),hashing(item, 2)]
         else:
             return hashing(item, mode)
 
