@@ -41,7 +41,7 @@ class TreeNode():
 
 
 class Tree():
-	def __init__(self, minsup, db={}):
+	def __init__(self, minsup, db=[]):
 		self._db = db
 		self._root = TreeNode()
 		self._size = 0
@@ -133,6 +133,7 @@ class Tree():
 				self.insertAndRecord(node._children[node._key + "," + comb[i]], comb[i+1:])
 
 	def insert(self, node, trx):
+		self._db.append(trx)
 		for i in range(len(trx)):
 			if trx[i] not in node._children:
 				newNode = self._addNode(node, trx[i])
