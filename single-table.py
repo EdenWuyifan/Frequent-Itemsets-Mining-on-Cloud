@@ -4,11 +4,12 @@ import sys
 import csv
 
 def scanDB(path, separator):
-	db = []
+	db = {}
 	f = open(path, 'r')
 	for line in f:
 		if line:
-			db.append(line.rstrip().split(separator))
+			trx = line.rstrip().split(separator)
+			db[trx] = db.get(trx, 0) + 1
 	f.close()
 	return db
 
