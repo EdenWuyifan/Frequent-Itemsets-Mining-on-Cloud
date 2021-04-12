@@ -34,18 +34,6 @@ def hashing(item,func_num):
         dest_rank = ((int(item**0.5))*10) % NUM_WORKER + 1
     return dest_rank
 
-class worker_0():
-    def __init__(self, minsup):
-        self._comm = MPI.COMM_WORLD
-        self._rank = self._comm.Get_rank()
-        self._size = self._comm.Get_size()
-
-
-
-        print("NODE created. rank is: %d" % self._rank)
-
-
-
 
 class worker():
     def __init__(self, minsup):
@@ -58,7 +46,7 @@ class worker():
         else:
             #Routing Table for worker 0
             self._rt = {}
-        print("NODE created. rank is: %d" % self._rank)
+        #print("NODE created. rank is: %d" % self._rank)
 
 
      ### ----------------worker.0------------------ ###

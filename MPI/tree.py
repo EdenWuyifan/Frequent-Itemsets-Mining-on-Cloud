@@ -64,8 +64,8 @@ class Tree():
     def __repr__(self):
         ret = []
         for item in self:
-            if item._key == "40" or item._key == "49":
-                print(item._key, item._count)
+            #if item._key == "40" or item._key == "49":
+                #print(item._key, item._count)
             if item._count >= self.minsup:
                 ret.append(str(item._key))
         return str(sorted(ret))

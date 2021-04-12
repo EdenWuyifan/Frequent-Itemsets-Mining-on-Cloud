@@ -1,0 +1,10 @@
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpiexec noticed that process rank 3 with PID 116073 on node compute44 exited on signal 9 (Killed).
+--------------------------------------------------------------------------
+real 8437.35
+user 8228.69
+sys 188.34

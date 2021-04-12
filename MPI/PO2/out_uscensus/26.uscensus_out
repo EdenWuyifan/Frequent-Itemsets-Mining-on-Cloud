@@ -1,0 +1,30 @@
+[compute34:287516] *** Process received signal ***
+[compute34:287529] *** Process received signal ***
+[compute34:287529] Signal: Bus error (7)
+[compute34:287529] Signal code: Non-existant physical address (2)
+[compute34:287529] Failing at address: 0x560b24251000
+[compute34:287516] Signal: Bus error (7)
+[compute34:287516] Signal code: Non-existant physical address (2)
+[compute34:287516] Failing at address: 0x563e54e24000
+[compute34:287529] [ 0] /lib64/libpthread.so.0(+0xf5e0)[0x7fd2643155e0]
+[compute34:287529] [ 1] python3(_PyEval_EvalFrameDefault+0x163e)[0x560b24250ffe]
+[compute34:287529] [ 2] python3(_PyEval_EvalCodeWithName+0x2d2)[0x560b24219a92]
+[compute34:287529] [ 3] python3(+0x18bd20)[0x560b2421ad20]
+[compute34:287529] [ 4] python3(+0x10011a)[0x560b2418f11a]
+[compute34:287529] [ 5] python3(_PyEval_EvalCodeWithName+0x2d2)[0x560b24219a92]
+[compute34:287529] [ 6] [compute34:287516] [ 0] /lib64/libpthread.so.0(+0xf5e0)[0x7fc88eef95e0]
+[compute34:287516] [ 1] python3(_PyEval_EvalFrameDefault+0x163e)[0x563e54e23ffe]
+[compute34:287516] [ 2] python3(_PyFunction_Vectorcall+0x1e3)[0x560b2421a943]
+[compute34:287529] [ 7] python3(+0x10075e)[0x560b2418f75e]
+[compute34:287529] [ 8] python3(_PyFunction_Vectorcall+0x10b)[0x560b2421a86b]
+[compute34:287529] [ 9] python3(+0x10075e)[0x560b2418f75e]
+[compute34:287529] [10] --------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpiexec noticed that process rank 1 with PID 287510 on node compute34 exited on signal 7 (Bus error).
+--------------------------------------------------------------------------
+real 7620.27
+user 7503.40
+sys 111.21

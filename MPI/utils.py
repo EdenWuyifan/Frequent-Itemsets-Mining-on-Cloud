@@ -33,7 +33,7 @@ class worker():
         self._size = self._comm.Get_size()
         self._tree = Tree(minsup)
         #threading.Thread(target=self.listening, daemon=True).start()
-        print("NODE created. rank is: %d" % self._rank)
+        #print("NODE created. rank is: %d" % self._rank)
 
     def hash(self, item):
         return hashing(item)

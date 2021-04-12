@@ -25,7 +25,7 @@ elif args.database == "skin":
 elif args.database == "uscensus":
     db = scanDB("../databases/USCensus.txt", " ")
 elif args.database == "online":
-    db = scanDB("databases/OnlineRetailZZ.txt", " ")
+    db = scanDB("../databases/OnlineRetailZZ.txt", " ")
 
 minsup = calc_minsup(int(args.minsup), db)
 
@@ -62,17 +62,12 @@ def main(me):
         me.listening()
 
     #print("NO.",me._rank,"Table Size:",me._tree._table_size)
-    if me._rank != 0:
-        print("NO.",me._rank, "Tree Size:",me._tree.size())
+    #if me._rank != 0:
+        #print("NO.",me._rank, "FI:",me._tree)
         # print(me._rank)
-        return str(me._tree)
+        #print(me._tree)
     #print("finished.")
 
 if __name__=="__main__":
     me = worker(minsup)
-    tree = main(me)
-    # save tree nodes of each host in output.txt
-    if me._rank != 0:
-        with open("./output.txt", 'a') as f:
-            f.write("rank " + str(me._rank) + "\n")
-            f.write(str(tree) + "\n")
+    main(me)

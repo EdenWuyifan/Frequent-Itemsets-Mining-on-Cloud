@@ -43,9 +43,9 @@ def main():
         else:
             me.listening()
 
-    #print("NO.",me._rank,"Table Size:",me._tree._table_size)
+    #print("NO.",me._rank,"Table Size:",me._tree)
     #print("NO.",me._rank, "Tree Size:",len(tree_list))
-    print(me._tree.size())
+    #print(me._tree.size())
     #print("finished.")
 
 if __name__=="__main__":

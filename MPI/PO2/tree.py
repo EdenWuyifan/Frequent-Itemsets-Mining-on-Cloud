@@ -63,9 +63,15 @@ class Tree():
 
     def __repr__(self):
         ret = []
-        for item in self.preorder():
-            # if item._count >= self.minsup:
-            ret.append(str(item._key))
+        #for item in self.preorder():
+        #    if item._count >= self.minsup:
+        #    	ret.append(str(item._key))
+
+        for item in self:
+            #if item._key == "40" or item._key == "49":
+                #print(item._key, item._count)
+            if item._count >= self.minsup:
+                ret.append(str(item._key))
         return ";".join(sorted(ret))
 
     def _addNode(self, parent, value, count=0):

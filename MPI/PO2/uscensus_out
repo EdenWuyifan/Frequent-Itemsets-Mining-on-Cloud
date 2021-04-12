@@ -1,0 +1,54 @@
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpiexec noticed that process rank 3 with PID 0 on node login2 exited on signal 9 (Killed).
+--------------------------------------------------------------------------
+real 3137.93
+user 3055.62
+sys 76.92
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpiexec noticed that process rank 7 with PID 0 on node login2 exited on signal 9 (Killed).
+--------------------------------------------------------------------------
+real 2707.54
+user 2629.17
+sys 68.04
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpiexec noticed that process rank 3 with PID 0 on node login2 exited on signal 9 (Killed).
+--------------------------------------------------------------------------
+real 6078.02
+user 5886.94
+sys 175.96
+real 12.05
+user 0.03
+sys 0.09
+real 59.34
+user 0.01
+sys 0.04
+real 0.16
+user 0.01
+sys 0.04
+real 0.16
+user 0.01
+sys 0.04
+real 0.32
+user 0.01
+sys 0.04
+real 0.00
+user 0.00
+sys 0.00
+real 0.17
+user 0.01
+sys 0.04
+real 28.23
+user 0.02
+sys 0.06
