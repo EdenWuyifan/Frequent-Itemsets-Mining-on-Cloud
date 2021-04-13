@@ -1,0 +1,111 @@
+Traceback (most recent call last):
+  File "run.py", line 52, in <module>
+    main()
+  File "run.py", line 44, in main
+    me.listening()
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/utils.py", line 71, in listening
+    self.insert(trx)
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/utils.py", line 44, in insert
+    self._tree.insert(self._tree._root,trx)
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/single_tree.py", line 141, in insert
+    self._db[trx] += 1
+TypeError: unhashable type: 'list'
+Traceback (most recent call last):
+  File "run.py", line 52, in <module>
+    main()
+  File "run.py", line 44, in main
+    me.listening()
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/utils.py", line 71, in listening
+    self.insert(trx)
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/utils.py", line 44, in insert
+    self._tree.insert(self._tree._root,trx)
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/single_tree.py", line 141, in insert
+    self._db[trx] += 1
+TypeError: unhashable type: 'list'
+Traceback (most recent call last):
+  File "run.py", line 52, in <module>
+    main()
+  File "run.py", line 44, in main
+    me.listening()
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/utils.py", line 71, in listening
+    self.insert(trx)
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/utils.py", line 44, in insert
+    self._tree.insert(self._tree._root,trx)
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/single_tree.py", line 141, in insert
+    self._db[trx] += 1
+TypeError: unhashable type: 'list'
+Traceback (most recent call last):
+  File "run.py", line 52, in <module>
+    main()
+  File "run.py", line 44, in main
+    me.listening()
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/utils.py", line 71, in listening
+    self.insert(trx)
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/utils.py", line 44, in insert
+    self._tree.insert(self._tree._root,trx)
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/single_tree.py", line 141, in insert
+    self._db[trx] += 1
+TypeError: unhashable type: 'list'
+Traceback (most recent call last):
+  File "run.py", line 52, in <module>
+    main()
+  File "run.py", line 44, in main
+    me.listening()
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/utils.py", line 71, in listening
+    self.insert(trx)
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/utils.py", line 44, in insert
+    self._tree.insert(self._tree._root,trx)
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/single_tree.py", line 141, in insert
+    self._db[trx] += 1
+TypeError: unhashable type: 'list'
+Traceback (most recent call last):
+  File "run.py", line 52, in <module>
+    main()
+  File "run.py", line 44, in main
+    me.listening()
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/utils.py", line 71, in listening
+    self.insert(trx)
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/utils.py", line 44, in insert
+    self._tree.insert(self._tree._root,trx)
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/single_tree.py", line 141, in insert
+    self._db[trx] += 1
+TypeError: unhashable type: 'list'
+Traceback (most recent call last):
+  File "run.py", line 52, in <module>
+    main()
+  File "run.py", line 44, in main
+    me.listening()
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/utils.py", line 71, in listening
+    self.insert(trx)
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/utils.py", line 44, in insert
+    self._tree.insert(self._tree._root,trx)
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/single_tree.py", line 141, in insert
+    self._db[trx] += 1
+TypeError: unhashable type: 'list'
+Traceback (most recent call last):
+  File "run.py", line 52, in <module>
+    main()
+  File "run.py", line 44, in main
+    me.listening()
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/utils.py", line 71, in listening
+    self.insert(trx)
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/utils.py", line 44, in insert
+    self._tree.insert(self._tree._root,trx)
+  File "/gpfsnyu/home/yfw215/Frequent-Itemsets-Mining-on-Cloud/MPI/single_tree.py", line 141, in insert
+    self._db[trx] += 1
+TypeError: unhashable type: 'list'
+NO. 0 Table Size: []
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpiexec detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[43164,1],5]
+  Exit code:    1
+--------------------------------------------------------------------------
+real 23.53
+user 28.17
+sys 1.61

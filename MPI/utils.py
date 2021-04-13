@@ -1,7 +1,7 @@
 from mpi4py import MPI
 import numpy as np
 
-from tree import Tree, TreeNode
+from single_tree import Tree, TreeNode
 import threading
 
 NUM_WORKER = 8
