@@ -28,7 +28,8 @@ def main():
         db = scanDB("databases/USCensus.txt", " ")
     elif args.database == "online":
         db = scanDB("databases/OnlineRetailZZ.txt", " ")
-
+    else:
+        db = scanDB("databases/"+args.database+".txt"," ")
     minsup = calc_minsup(int(args.minsup), db)
     me = worker(minsup)
 

@@ -26,7 +26,8 @@ elif args.database == "uscensus":
     db = scanDB("../databases/USCensus.txt", " ")
 elif args.database == "online":
     db = scanDB("../databases/OnlineRetailZZ.txt", " ")
-
+else:
+    db = scanDB("../databases/"+args.database+".txt"," ")
 minsup = calc_minsup(int(args.minsup), db)
 
 def main(me):
@@ -62,8 +63,8 @@ def main(me):
         me.listening()
 
     #print("NO.",me._rank,"Table Size:",me._tree._table_size)
-    #if me._rank != 0:
-        #print("NO.",me._rank, "FI:",me._tree)
+    if me._rank != 0:
+        print("NO.",me._rank, "FI:",me._tree)
         # print(me._rank)
         #print(me._tree)
     #print("finished.")

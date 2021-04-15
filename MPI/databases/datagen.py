@@ -26,9 +26,10 @@ for l in range(args.fre-1):
         item = random.randint(1,args.itm)
         trx_lst.append(item)
     for i in range(args.trx//args.fre):
-        if random.randint(0,1):
+        if random.randint(0,100)>=100:
             trx_lst[random.randint(0,curr_len-1)] += 1
         temp_lst = [str(int) for int in trx_lst]
+        temp_lst = list(set(temp_lst))
         line = " ".join(temp_lst)
         line += "\n"
         #print(line)
@@ -40,9 +41,10 @@ for j in range(curr_len):
     item = random.randint(1,args.itm)
     trx_lst.append(item)
 for i in range(args.trx - (args.trx//args.fre)*(args.fre-1)):
-    if random.randint(0,1):
+    if random.randint(0,100)>=100:
         trx_lst[random.randint(0,curr_len-1)] += 1
     temp_lst = [str(int) for int in trx_lst]
+    temp_lst = list(set(temp_lst))
     line = " ".join(temp_lst)
     line += "\n"
     #print(line)
