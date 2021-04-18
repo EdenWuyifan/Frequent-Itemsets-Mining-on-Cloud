@@ -1,6 +1,7 @@
 from mpi4py import MPI
 import numpy as np
 import argparse
+import os
 
 from utils import worker, scanDB, calc_minsup 
 
@@ -9,25 +10,26 @@ parser.add_argument('--database', '-d', help='database name', required=True)
 parser.add_argument('--minsup', '-m', help='min support percentage', required=True)
 args = parser.parse_args()
 
+DBDIR = "../databases"
 
 def main():
     # create new worker upon init
     if args.database == "retail":
-        db = scanDB("databases/retail.txt", " ")
+        db = scanDB(os.path.join(DBDIR, "retail.txt"), " ")
     elif args.database == "kosarak":
-        db = scanDB("databases/kosarak.dat", " ")
+        db = scanDB(os.path.join(DBDIR, "kosarak.dat"), " ")
     elif args.database == "chainstore":
-        db = scanDB("databases/chainstoreFIM.txt", " ")
+        db = scanDB(os.path.join(DBDIR, "chainstoreFIM.txt"), " ")
     elif args.database == "susy":
-        db = scanDB("databases/SUSY.txt", " ")
+        db = scanDB(os.path.join(DBDIR, "SUSY.txt"), " ")
     elif args.database == "record":
-        db = scanDB("databases/RecordLink.txt", " ")
+        db = scanDB(os.path.join(DBDIR, "RecordLink.txt"), " ")
     elif args.database == "skin":
-        db = scanDB("databases/Skin.txt", " ")
+        db = scanDB(os.path.join(DBDIR, "Skin.txt"), " ")
     elif args.database == "uscensus":
-        db = scanDB("databases/USCensus.txt", " ")
+        db = scanDB(os.path.join(DBDIR, "USCensus.txt"), " ")
     elif args.database == "online":
-        db = scanDB("databases/OnlineRetailZZ.txt", " ")
+        db = scanDB(os.path.join(DBDIR, "OnlineRetailZZ.txt"), " ")
 
     minsup = calc_minsup(int(args.minsup), db)
     me = worker(minsup)

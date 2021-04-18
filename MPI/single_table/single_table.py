@@ -114,12 +114,13 @@ class Tree():
 				# add node
 				newNode = self._addNode(node, node._key + "," + item, node._item_table[item])
 				# transfer patterns to newNode
-				for ptn in self._db.keys():
-					i = isSubSequence(node._key.split(",") + [item], ptn.split(","))
+				for ptnStr, c in self._db.items():
+					ptn = ptnStr.split(",")
+					i = isSubSequence(node._key.split(",") + [item], ptn)
 					if i:
 						if i < len(ptn) - 1:
 							suffix = ptn[i + 1:]
-							self._recordInfo(newNode, suffix, self._db[ptn])
+							self._recordInfo(newNode, suffix, c)
 
 
 	def insertAndRecord(self, node, comb):
@@ -133,10 +134,18 @@ class Tree():
 			if node._key + "," + comb[i] in node._children:
 				self.insertAndRecord(node._children[node._key + "," + comb[i]], comb[i+1:])
 
-	def insert(self, node, trx):
+	def myinsert(self, node, trx):
 		trxStr = ",".join(trx)
 		self._db[trxStr] = self._db.get(trxStr, 0) + 1
 		for i in range(len(trx)):
+			if trx[i] not in node._children:
+				newNode = self._addNode(node, trx[i])
+			self.insertAndRecord(node._children[trx[i]], trx[i+1:])
+
+	def insert(self, node, trx, pointers):
+		trxStr = ",".join(trx)
+		self._db[trxStr] = self._db.get(trxStr, 0) + 1
+		for i in pointers:
 			if trx[i] not in node._children:
 				newNode = self._addNode(node, trx[i])
 			self.insertAndRecord(node._children[trx[i]], trx[i+1:])
