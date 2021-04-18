@@ -12,6 +12,6 @@
 #module purge
 #module load /anaconda3/bin/python
 
-(time -p mpiexec -np 9 python3 run.py --database record --minsup $SLURM_ARRAY_TASK_ID) > $SLURM_ARRAY_TASK_ID.record_out 2>&1
+(time -p mpiexec -np 9 python3 run.py --database 1000000_1000 --minsup $SLURM_ARRAY_TASK_ID) > $SLURM_ARRAY_TASK_ID.1000000_1000_out 2>&1
 
 
