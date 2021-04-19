@@ -49,11 +49,7 @@ class Tree():
 		self.minsup = minsup
 		self._times = []
 
-
     #-------------------------- public accessors -------------------
-	def table_size(self):
-		return len(self._db)
-
 	def size(self):
 		return self._size
 
@@ -92,9 +88,16 @@ class Tree():
 			for other in self._subtree_preorder(c):
 				yield other
 
+	def toList(self):
+		ret = []
+		for item in self.preorder():
+			if item._count >= self.minsup:
+				ret.append(str(item._key))
+		return ret
+
 	def __repr__(self):
 		ret = []
-		for item in self:
+		for item in self.preorder():
 			if item._count >= self.minsup:
 				ret.append(str(item._key))
 		return str(sorted(ret))
@@ -110,20 +113,25 @@ class Tree():
 
 	def _recordInfo(self, node, comb, count=1):
 		combStr = (",").join(comb)
+		new_freq_items = []
 		for item in comb:
-			node._item_table[item] = node._item_table.get(item, 0) + count
-		for item in comb:
+			old_count = node._item_table.get(item, 0)
+			new_count = old_count + count
+			node._item_table[item] = new_count
 			# item just became frequent
-			if node._item_table[item] >= self.minsup and (node._key + "," + item) not in node._children:
-				# add node
-				newNode = self._addNode(node, node._key + "," + item, node._item_table[item])
-				# transfer patterns to newNode
-				for ptn in self._db.keys():
-					i = isSubSequence(node._key.split(",") + [item], ptn)
-					if i:
-						if i < len(ptn) - 1:
-							suffix = ptn[i + 1:]
-							self._recordInfo(newNode, suffix)
+			if old_count < self.minsup and new_count >= self.minsup:
+				new_freq_items.append(item)
+		for item in new_freq_items:
+			# add node
+			newNode = self._addNode(node, node._key + "," + item, node._item_table[item])
+			# transfer patterns to newNode
+			for ptnStr, c in self._db.items():
+				ptn = ptnStr.split(",")
+				i = isSubSequence(node._key.split(",") + [item], ptn)
+				if i:
+					if i < len(ptn) - 1:
+						suffix = ptn[i + 1:]
+						self._recordInfo(newNode, suffix, c)
 
 
 	def insertAndRecord(self, node, comb):
@@ -137,11 +145,20 @@ class Tree():
 			if node._key + "," + comb[i] in node._children:
 				self.insertAndRecord(node._children[node._key + "," + comb[i]], comb[i+1:])
 
-	def insert(self, node, trx):
-		self._db[trx] = self._db.get(trx,0)+1
-		#for i in range(len(trx)):
-		if trx[0] not in node._children:
-			newNode = self._addNode(node, trx[0])
-		self.insertAndRecord(node._children[trx[0]], trx[1:])
+	def myinsert(self, node, trx):
+		trxStr = ",".join(trx)
+		self._db[trxStr] = self._db.get(trxStr, 0) + 1
+		for i in range(len(trx)):
+			if trx[i] not in node._children:
+				newNode = self._addNode(node, trx[i])
+			self.insertAndRecord(node._children[trx[i]], trx[i+1:])
+
+	def insert(self, node, trx, pointers):
+		trxStr = ",".join(trx)
+		self._db[trxStr] = self._db.get(trxStr, 0) + 1
+		for i in pointers:
+			if trx[i] not in node._children:
+				newNode = self._addNode(node, trx[i])
+			self.insertAndRecord(node._children[trx[i]], trx[i+1:])
 
 
