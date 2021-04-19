@@ -1,35 +1,24 @@
 from mpi4py import MPI
 import numpy as np
 import argparse
+import json
+import csv
 import os
+from time import time
 
-from utils import worker, scanDB, calc_minsup 
+from utils import worker, get_DB_path, scanDB, calc_minsup 
 
 parser = argparse.ArgumentParser(description='argparse')
+parser.add_argument('--expnum', '-e', help='experiment number', required=True)
+parser.add_argument('--dbpath', '-b', help='database path', required=True)
 parser.add_argument('--database', '-d', help='database name', required=True)
 parser.add_argument('--minsup', '-m', help='min support percentage', required=True)
+parser.add_argument('--result', '-r', help='result output path', required=False)
 args = parser.parse_args()
-
-DBDIR = "../databases"
 
 def main():
     # create new worker upon init
-    if args.database == "retail":
-        db = scanDB(os.path.join(DBDIR, "retail.txt"), " ")
-    elif args.database == "kosarak":
-        db = scanDB(os.path.join(DBDIR, "kosarak.dat"), " ")
-    elif args.database == "chainstore":
-        db = scanDB(os.path.join(DBDIR, "chainstoreFIM.txt"), " ")
-    elif args.database == "susy":
-        db = scanDB(os.path.join(DBDIR, "SUSY.txt"), " ")
-    elif args.database == "record":
-        db = scanDB(os.path.join(DBDIR, "RecordLink.txt"), " ")
-    elif args.database == "skin":
-        db = scanDB(os.path.join(DBDIR, "Skin.txt"), " ")
-    elif args.database == "uscensus":
-        db = scanDB(os.path.join(DBDIR, "USCensus.txt"), " ")
-    elif args.database == "online":
-        db = scanDB(os.path.join(DBDIR, "OnlineRetailZZ.txt"), " ")
+    db = get_DB_path(args.dbpath, args.database)
 
     minsup = calc_minsup(int(args.minsup), db)
     me = worker(minsup)
@@ -45,10 +34,16 @@ def main():
         else:
             me.listening()
 
-    print("NO.",me._rank,"Table Size:",me._tree)
+    if args.result:
+        with open(os.path.join(args.result, f'{me._rank}.json'), 'a') as f_result:
+            json.dump(sorted(me._tree.toList()), f_result)
+
+    return
+    # print("NO.",me._rank,"Table Size:",me._tree)
     #print("NO.",me._rank, "Tree Size:",len(tree_list))
     #print(me._tree.size())
     #print("finished.")
 
 if __name__=="__main__":
     main()
+    

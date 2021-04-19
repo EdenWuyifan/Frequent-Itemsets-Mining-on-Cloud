@@ -1,10 +1,30 @@
 from mpi4py import MPI
 import numpy as np
+import os
 
 from single_table import Tree, TreeNode
 import threading
 
 NUM_WORKER = 8
+
+def get_DB_path(DBDIR, dbname):
+    if dbname == "retail":
+        db = scanDB(os.path.join(DBDIR, "retail.txt"), " ")
+    elif dbname == "kosarak":
+        db = scanDB(os.path.join(DBDIR, "kosarak.dat"), " ")
+    elif dbname == "chainstore":
+        db = scanDB(os.path.join(DBDIR, "chainstoreFIM.txt"), " ")
+    elif dbname == "susy":
+        db = scanDB(os.path.join(DBDIR, "SUSY.txt"), " ")
+    elif dbname == "record":
+        db = scanDB(os.path.join(DBDIR, "RecordLink.txt"), " ")
+    elif dbname == "skin":
+        db = scanDB(os.path.join(DBDIR, "Skin.txt"), " ")
+    elif dbname == "uscensus":
+        db = scanDB(os.path.join(DBDIR, "USCensus.txt"), " ")
+    elif dbname == "online":
+        db = scanDB(os.path.join(DBDIR, "OnlineRetailZZ.txt"), " ")
+    return db
 
 def scanDB(path, seperation):
     db = []
