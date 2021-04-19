@@ -85,7 +85,7 @@ def plotSpeed(title, x, listOfMeanErr):
 	for item in listOfMeanErr:
 		ax.errorbar(x, item[1], yerr=item[2], linestyle="dashed", marker="", markersize=10, linewidth=1, elinewidth=1.5, capsize=3, label=item[0])
 	
-	ax.legend(loc=0, bbox_to_anchor=(0.5, 0., 0.5, 0.8))
+	ax.legend(loc=0)
 	plt.title(title)
 	plt.show()
 	fig.savefig(title.replace(" ", "_") + '.png')
