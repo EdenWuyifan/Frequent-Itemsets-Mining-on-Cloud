@@ -49,9 +49,9 @@ re="$result/result"
 size="$tablesize/size"
 
 ####python script to run
-run="$DIR/run.py"
-runresult="$DIR/runresult.py"
-runperf="$DIR/runperf.py"
-runmem="$DIR/runmem.py"
+run="$ALGODIR/run.py"
+runresult="$ALGODIR/runresult.py"
+runperf="$ALGODIR/runperf.py"
+runmem="$ALGODIR/runmem.py"
 ###script for table size
-runsize="$DIR/runsize.py"
+runsize="$ALGODIR/runsize.py"

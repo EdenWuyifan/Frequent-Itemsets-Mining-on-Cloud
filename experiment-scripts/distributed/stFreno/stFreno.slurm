@@ -61,7 +61,7 @@ else
 				if [ ! -d $THISSIZEDIR ]; then
 					mkdir $THISSIZEDIR
 				fi
-				mpiexec -np 9 python3 $runperf -e $expnum --dbpath $ALLDATADIR -d $dataset -m $SLURM_ARRAY_TASK_ID -s $THISSIZEDIR
+				mpiexec -np 9 python3 $runsize -e $expnum --dbpath $ALLDATADIR -d $dataset -m $SLURM_ARRAY_TASK_ID -s $THISSIZEDIR
 			done
 	else
 		for expnum in $(seq 1 1 $expnums);
