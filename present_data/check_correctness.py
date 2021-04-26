@@ -22,10 +22,22 @@ def getDistResults(rdir):
 		ret[k].sort()
 	return ret
 
-def getSTFrenoResults(fpath):
+def getJSONResults(fpath):
 	with open(fpath, 'r') as file:
 		data = json.load(file)
 		return data
+
+def getFPGrowhJSONResults(fpath):
+	raw_data = getJSONResults(fpath)
+	for k in raw_data.keys():
+		for i in range(len(raw_data[k])):
+			new_str = ",".join(sorted(raw_data[k][i].rstrip(";").split(";")))
+			raw_data[k][i] = new_str
+	for k in raw_data.keys():
+		if raw_data[k] == ['']:
+			raw_data[k] = []
+		raw_data[k].sort()
+	return raw_data
 
 def sortFPGrowthResults(l):
 	ret = []
@@ -53,8 +65,10 @@ def getSortedResults(fpath):
 				temp = temp.rstrip("]").lstrip("[").split("','")
 				temp = sortFPGrowthResults(temp)
 				d[key] = temp
-
 	f.close()
+	for k in d.keys():
+		if d[k] == ['']:
+			d[k] = []
 	return d
 
 
@@ -71,42 +85,42 @@ def checkCorrectness(path1, path2):
     f2.close()
     return True
 
-def compareWithFPGrowth(exp1, exp2, measurement, dataset):
-	filepath1 = os.path.join(".", exp1, measurement, dataset)
-	filepath2 = os.path.join(".", exp2, measurement, dataset)
+def compareWithFPGrowth(exp1, exp2, dataset):
+	filepath1 = os.path.join(".", exp1, "result", dataset)
+	filepath2 = os.path.join(".", exp2, "result", dataset)
 
 	data = {}
-	result = measurement + '01.txt'
+	result = 'result01.txt'
 	resultpath1 = os.path.join(filepath1, result)
-	fpGrowth = getSortedData(resultpath1)
-	freno = getData(os.path.join(filepath2, "result01.json"))
+	fpGrowth = getSortedResults(resultpath1)
+	freno = getJSONResults(os.path.join(filepath2, "result01.json"))
 	for key in freno.keys():
 		if not (freno[key] == fpGrowth[key]):
 			print(key, freno[key], fpGrowth[key])
 
 
-def compareWithSTFreno(exp1, exp2, measurement, dataset):
-	filepath1 = os.path.join(".", exp1, measurement, dataset)
-	filepath2 = os.path.join(".", exp2, measurement, dataset)
+def compareWithSTFreno(exp1, exp2, dataset):
+	filepath1 = os.path.join(".", exp1, "result", dataset)
+	filepath2 = os.path.join(".", exp2, "result", dataset)
 
 	data = {}
-	result = measurement + '01.txt'
+	result = 'result01.txt'
 	resultpath1 = os.path.join(filepath1, result)
-	freno = getData(os.path.join(filepath1, "result01.json"))
-	stFreno = getData(os.path.join(filepath2, "result01.json"))
+	freno = getJSONResults(os.path.join(filepath1, "result01.json"))
+	stFreno = getJSONResults(os.path.join(filepath2, "result01.json"))
 	for key in freno.keys():
 		if not (freno[key] == stFreno[key]):
 			pass
 
 
-def compareWithDist(exp1, exp2, measurement, dataset):
-	filepath1 = os.path.join(".", exp1, measurement, dataset)
+def compareWithDist(exp1, exp2, dataset):
+	filepath1 = os.path.join(".", exp1, "result", dataset)
 	data = {}
-	result = measurement + '01.txt'
+	result = 'result01.txt'
 	resultpath1 = os.path.join(filepath1, result)
-	freno = getData(os.path.join(filepath1, "result01.json"))
+	freno = getJSONResults(os.path.join(filepath1, "result01.json"))
 
-	distSTFrenoDir = os.path.join(".", exp2, measurement, dataset)
+	distSTFrenoDir = os.path.join(".", exp2, "result", dataset)
 	distSTFreno = getDistResults(distSTFrenoDir)
 
 	for key in distSTFreno.keys():
@@ -119,13 +133,18 @@ def compareWithDist(exp1, exp2, measurement, dataset):
 
 
 if __name__ == '__main__':
-	measurement = "result"
-	datasets = ["retail", "kosarak", "record", "chainstore"]
+	args = sys.argv
+	algo1 = args[1]
+	algo2 = args[2]
+	datasets = ["retail", "kosarak", "record", "chainstore", "skin"]
 
-	# compareWithFPGrowth("FP-Growth", "Freno", measurement, dataset)
-	# compareWithFPGrowth("Freno", "stFreno", measurement, dataset)
+	# compareWithFPGrowth("FP-Growth", "Freno", dataset)
+	# compareWithFPGrowth("Freno", "stFreno", dataset)
 	for dataset in datasets:
-		compareWithDist("Freno", "distSTFreno", measurement, dataset)
+		if algo1 == "FP-Growth":
+			compareWithFPGrowth("FP-Growth", algo2, dataset)
+		elif algo2 == "FP-Growth":
+			compareWithFPGrowth("FP-Growth", algo1, dataset)
 
 
 
