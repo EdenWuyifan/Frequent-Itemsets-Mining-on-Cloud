@@ -1,0 +1,28 @@
+real 34424.55
+user 0.00
+sys 0.00
+real 35331.47
+user 0.01
+sys 0.01
+real 36296.34
+user 0.01
+sys 0.01
+real 32827.12
+user 0.01
+sys 0.01
+real 32188.03
+user 0.01
+sys 0.01
+real 31424.34
+user 0.01
+sys 0.01
+real 33754.34
+user 0.01
+sys 0.00
+real 35366.14
+user 0.02
+sys 0.01
+slurmstepd: error: *** STEP 2135735.2 ON compute29 CANCELLED AT 2021-04-21T02:09:23 DUE TO TIME LIMIT ***
+slurmstepd: error: *** STEP 2135745.2 ON compute50 CANCELLED AT 2021-04-21T02:14:31 DUE TO TIME LIMIT ***
+slurmstepd: error: *** STEP 2135754.2 ON compute42 CANCELLED AT 2021-04-21T02:27:38 DUE TO TIME LIMIT ***
+slurmstepd: error: *** STEP 2135769.2 ON compute32 CANCELLED AT 2021-04-21T03:24:01 DUE TO TIME LIMIT ***

@@ -1,0 +1,55 @@
+srun: error: Invalid user id 750: No error
+srun: Warning: Unable to assume uid=750
+real 58.13
+user 0.01
+sys 0.01
+srun: error: Invalid user id 750: No error
+srun: Warning: Unable to assume uid=750
+real 55.46
+user 0.01
+sys 0.00
+srun: error: Invalid user id 750: No error
+srun: Warning: Unable to assume uid=750
+real 56.49
+user 0.00
+sys 0.00
+srun: error: Invalid user id 750: No error
+srun: Warning: Unable to assume uid=750
+real 63.73
+user 0.01
+sys 0.00
+srun: error: Invalid user id 750: No error
+srun: Warning: Unable to assume uid=750
+real 58.72
+user 0.01
+sys 0.00
+srun: error: Invalid user id 750: No error
+srun: Warning: Unable to assume uid=750
+real 56.63
+user 0.00
+sys 0.00
+srun: error: Invalid user id 750: No error
+srun: Warning: Unable to assume uid=750
+real 56.07
+user 0.00
+sys 0.00
+srun: error: Invalid user id 750: No error
+srun: Warning: Unable to assume uid=750
+real 55.73
+user 0.00
+sys 0.01
+srun: error: Invalid user id 750: No error
+srun: Warning: Unable to assume uid=750
+real 57.71
+user 0.00
+sys 0.01
+srun: error: Invalid user id 750: No error
+srun: Warning: Unable to assume uid=750
+real 55.40
+user 0.00
+sys 0.00
+srun: error: Invalid user id 750: No error
+srun: Warning: Unable to assume uid=750
+real 55.99
+user 0.00
+sys 0.00

@@ -1,0 +1,5 @@
+srun: error: Invalid user id 750: No error
+srun: Warning: Unable to assume uid=750
+slurmstepd: error: *** STEP 2135738.0 ON compute41 CANCELLED AT 2021-04-21T02:12:39 DUE TO TIME LIMIT ***
+slurmstepd: error: *** STEP 2135747.0 ON compute50 CANCELLED AT 2021-04-21T02:14:31 DUE TO TIME LIMIT ***
+slurmstepd: error: *** STEP 2135756.0 ON compute49 CANCELLED AT 2021-04-21T02:29:03 DUE TO TIME LIMIT ***

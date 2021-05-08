@@ -1,0 +1,40 @@
+real 25701.97
+user 0.01
+sys 0.01
+real 29130.13
+user 0.02
+sys 0.01
+real 28871.39
+user 0.02
+sys 0.03
+real 39659.47
+user 0.01
+sys 0.00
+real 25577.26
+user 0.01
+sys 0.02
+real 29682.19
+user 0.02
+sys 0.01
+real 29054.85
+user 0.01
+sys 0.01
+real 25634.25
+user 0.02
+sys 0.01
+real 39598.56
+user 0.01
+sys 0.01
+real 28269.93
+user 0.02
+sys 0.01
+real 28999.12
+user 0.01
+sys 0.01
+srun: Job step aborted: Waiting up to 62 seconds for job step to finish.
+slurmstepd: error: *** STEP 2135723.3 ON compute52 CANCELLED AT 2021-04-20T14:12:29 DUE TO TIME LIMIT ***
+srun: Job step aborted: Waiting up to 62 seconds for job step to finish.
+slurmstepd: error: *** STEP 2135728.3 ON compute50 CANCELLED AT 2021-04-21T02:14:31 DUE TO TIME LIMIT ***
+srun: Job step aborted: Waiting up to 62 seconds for job step to finish.
+slurmstepd: error: *** STEP 2135732.3 ON compute49 CANCELLED AT 2021-04-21T02:29:03 DUE TO TIME LIMIT ***
+srun: Job step aborted: Waiting up to 62 seconds for job step to finish.
